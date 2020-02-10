@@ -1,0 +1,44 @@
+box: google/golang
+
+build:
+  steps:
+    - setup-go-workspace
+
+    - script:
+       name: Build application
+       code: | 
+          go get github.com/elbakouchi/example
+          go build -o mygoapp
+
+    - script:
+       name: Copy binary
+       code: |
+          cp mygoapp "$WERCKER_OUTPUT_DIR"
+
+deploy:
+  steps:
+    -internal/docker-scratch-push:
+      username: $DOCKER_USERNAME
+      password: $DOCKER_PASSWORD
+      repository: elbakouchi/mygoapp
+      cmd: ./mygoapp
+
+
+ovh:
+
+  steps:
+    - install-packages:
+       packages: openssh-client open-server
+    - add-to-known_hosts:
+       hostname: 51.91.9.179
+       local: true
+    - add-ssh-key:
+       keyname: ovh-debian
+    - script:
+       name: pull latest image
+       code: |
+          ssh hamza@51.91.9.179 docker pull elbakouchi/mygoapp:latest
+          ssh hamza@51.91.9.179 docker tag  elbakouchi/mygoapp:latest elbakouchi/mygoapp:current
+          ssh hamza@51.91.9.179 docker rmi  elbakouchi/mygoapp:latest   
+
+      
