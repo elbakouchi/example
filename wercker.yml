@@ -10,7 +10,7 @@ build:
     - script:
        name: Build Go application
        code: | 
-          go get -u github.com/wercker/getting-started-golang
+          go get -u github.com/elbakouchi/example
           go build -o myapp
 
     - script:
