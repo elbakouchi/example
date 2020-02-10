@@ -33,7 +33,7 @@ ovh:
        hostname: 51.91.9.179
        local: true
     - add-ssh-key:
-       keyname: ovh-debian
+       keyname: ovh_debian
     - script:
        name: pull latest image
        code: |
