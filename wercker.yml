@@ -5,7 +5,7 @@ build:
     - setup-go-workspace
 
     - script:
-       name: Build application
+       name: Build Go application
        code: | 
           go get -u github.com/wercker/getting-started-golang
           go build -o myapp
