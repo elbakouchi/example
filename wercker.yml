@@ -8,7 +8,6 @@ build:
        name: Build application
        code: | 
           go get -u github.com/elbakouchi/example
-          cd hello
           go build -o mygoapp
 
     - script:
