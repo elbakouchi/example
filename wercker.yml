@@ -4,13 +4,10 @@ build:
   steps:
     - setup-go-workspace
 
-    - add-to-known_hosts:
-       hostname: github.com
-
     - script:
        name: Build Go application
        code: | 
-          go get -u github.com/elbakouchi/example
+          go get -d github.com/elbakouchi/example
           go build -o myapp
 
     - script:
