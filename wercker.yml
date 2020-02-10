@@ -7,13 +7,13 @@ build:
     - script:
        name: Build application
        code: | 
-          go get -u github.com/elbakouchi/example
-          go build -o mygoapp
+          go get -u github.com/wercker/getting-started-golang
+          go build -o myapp
 
     - script:
        name: Copy binary
        code: |
-          cp mygoapp "$WERCKER_OUTPUT_DIR"
+          cp myapp "$WERCKER_OUTPUT_DIR"
 
 deploy:
   steps:
@@ -21,7 +21,7 @@ deploy:
       username: $DOCKER_USERNAME
       password: $DOCKER_PASSWORD
       repository: elbakouchi/mygoapp
-      cmd: ./mygoapp
+      cmd: ./myapp
 
 
 ovh:
